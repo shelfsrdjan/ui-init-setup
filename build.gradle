@@ -12,7 +12,12 @@ repositories {
 ext {
     seleniumVersion = '4.1.4'
     junitVersion = '5.8.2'
+//    junitCompileVersion = '5.8.1'
     webDrviverVersion = '5.2.1'
+    ownerVersion = '1.0.12'
+    jacksonVersion = '2.13.2'
+    lombokVersion = '1.18.24'
+    slf4jVersion = '1.7.36'
 }
 
 sourceCompatibility = '16'
@@ -23,12 +28,36 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
+    implementation 'org.projectlombok:lombok:1.18.22'
     testImplementation("org.seleniumhq.selenium:selenium-java:${seleniumVersion}")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 
+    // https://mvnrepository.com/artifact/org.aeonbits.owner/owner
+    testImplementation("org.aeonbits.owner:owner:$ownerVersion") {
+        because("we want a reduction in boilerplate code related to reading/using values from .properties files in Java")
+    }
+
     testImplementation("io.github.bonigarcia:webdrivermanager:${webDrviverVersion}")
+
+    // logging facade
+    // https://mvnrepository.com/artifact/org.slf4j
+    testImplementation "org.slf4j:slf4j-api:$slf4jVersion"
+    testImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
+
+    // jackson - yaml (de)serialization
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
+    testImplementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    testImplementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+
+    // lombok - boilerplate-reducing annotations
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    testImplementation "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
 }
 
 test {

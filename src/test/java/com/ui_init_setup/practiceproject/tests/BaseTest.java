@@ -1,31 +1,32 @@
-package tests;
+package com.ui_init_setup.practiceproject.tests;
 
+import com.ui_init_setup.practiceproject.WebDriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.SwagLabsLoginPage;
 
 import java.time.Duration;
 
+class BaseTest {
 
-public class SwagLabsLoginTest
-{
     WebDriver driver;
     WebDriverWait wdWait;
 
     @BeforeAll
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
+//        WebDriverFactory.CHROME.createDriver();
     }
 
     @BeforeEach
     void setupTest() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        wdWait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        driver.get("https://www.saucedemo.com/");
+        wdWait = new WebDriverWait(driver, Duration.ofMillis(3000));
     }
 
     @AfterEach
@@ -33,12 +34,4 @@ public class SwagLabsLoginTest
         driver.close();
         driver.quit();
     }
-
-    @Test
-    void shouldLoginAsStandardUser() {
-        SwagLabsLoginPage swagLabsLoginPage = new SwagLabsLoginPage(driver,wdWait);
-        swagLabsLoginPage.fetchCredentialsForStandardUser();
-        Assertions.assertEquals("https://www.saucedemo.com/inventory.html",driver.getCurrentUrl());
-    }
-
 }
