@@ -25,7 +25,7 @@ public enum WebDriverFactory {
             chromeOptions.addArguments(START_MAXIMIZED);
             chromeOptions.addArguments(DISABLE_INFOBARS);
             chromeOptions.addArguments(DISABLE_NOTIFICATIONS);
-//            chromeOptions.setHeadless(HEADLESS);
+            chromeOptions.setHeadless(HEADLESS);
             return chromeOptions;
         }
     }, FIREFOX {
@@ -47,7 +47,7 @@ public enum WebDriverFactory {
     private static final String START_MAXIMIZED = "--start-maximized";
     private static final String DISABLE_NOTIFICATIONS = "--disable-notifications";
     private static final String DISABLE_INFOBARS = "--disable-infobars";
-//    private static final boolean HEADLESS = ConfigurationManager.getBrowserConfigInstance().headless();
+    private static final boolean HEADLESS = ConfigurationManager.getBrowserConfigInstance().headless();
 
     public abstract RemoteWebDriver createDriver();
     public abstract AbstractDriverOptions<?> getOptions();

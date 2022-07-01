@@ -43,16 +43,4 @@ public class GoogleTest {
         WebElement input = driver.findElement(By.tagName("input"));
         input.sendKeys("Selenium");
     }
-
-//        WebDriver driver = WebDriverFactory.CHROME.createDriver();
-//    AuthConfig authConfig = ConfigurationManager.getAuthConfigInstance();
-//
-//    new JobertyHomePage(driver)
-//            .get()
-//            .openLoginModal()
-//            .logInAs(authConfig.jobertyUsername(), authConfig.jobertyPassword())
-//            .goToJobs()
-//            .selectSeniority(Seniority.INTERNSHIP)
-//            .enterSearchText("ux")
-//            .search();
 }

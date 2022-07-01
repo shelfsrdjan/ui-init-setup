@@ -64,9 +64,21 @@ test {
     useJUnitPlatform()
 }
 
-tasks.withType(Test) {
 
+tasks.withType(Test) {
+    useJUnitPlatform() {
+        includeTags(project.hasProperty('tags') ? project.getProperty('tags') : "none() | any()")
+    }
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+    testLogging.showStandardStreams = true
+    group = "verification"
     systemProperties = [
-            "target_env": project.hasProperty('target_env') ? project.getProperty('target_env') : 'qa'
+            "target_env": project.hasProperty('target_env') ? project.getProperty('target_env') : 'qa',
+            // create testrail report after test run
+            "testrail": project.hasProperty('testrail') ? project.getProperty('testrail') : false,
+            // override property value defined in junit-platform.properties if provided via cmd
+            'junit.jupiter.execution.parallel.enabled': project.hasProperty('parallel') ? project.getProperty('parallel') : false
     ]
 }
