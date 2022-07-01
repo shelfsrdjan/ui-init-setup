@@ -1,4 +1,4 @@
-package tests;
+package com.ui_init_setup.practiceproject.tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
