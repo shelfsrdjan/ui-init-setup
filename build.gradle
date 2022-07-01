@@ -63,3 +63,10 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+tasks.withType(Test) {
+
+    systemProperties = [
+            "target_env": project.hasProperty('target_env') ? project.getProperty('target_env') : 'qa'
+    ]
+}

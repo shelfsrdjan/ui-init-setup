@@ -1,32 +1,22 @@
 package com.ui_init_setup.practiceproject.tests;
 
-import com.ui_init_setup.practiceproject.WebDriverFactory;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.ui_init_setup.practiceproject.webDriver.WebDriverFactory;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 class BaseTest {
 
-    WebDriver driver;
+    private final int WAIT_FOR_ELEMENT_TIMEOUT = 3000;
+    WebDriver driver = WebDriverFactory.CHROME.createDriver();
     WebDriverWait wdWait;
-
-    @BeforeAll
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-//        WebDriverFactory.CHROME.createDriver();
-    }
 
     @BeforeEach
     void setupTest() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        wdWait = new WebDriverWait(driver, Duration.ofMillis(3000));
+        wdWait = new WebDriverWait(driver, Duration.ofMillis(WAIT_FOR_ELEMENT_TIMEOUT));
     }
 
     @AfterEach

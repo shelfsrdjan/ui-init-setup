@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import com.ui_init_setup.practiceproject.pages.SwagLabsLoginPage;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -20,7 +19,6 @@ class SwagLabsLoginTest extends BaseTest {
         swagLabsLoginPage = new SwagLabsLoginPage(driver);
         swagLabsLoginPage.get();
     }
-
 
     @ParameterizedTest
     @CsvSource({ "standard_user,secret_sauce","problem_user,secret_sauce","performance_glitch_user,secret_sauce"})
