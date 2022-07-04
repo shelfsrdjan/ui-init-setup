@@ -39,7 +39,7 @@ public enum WebDriverFactory {
         public FirefoxOptions getOptions() {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             firefoxOptions.addArguments(START_MAXIMIZED);
-//            firefoxOptions.setHeadless(HEADLESS);
+            firefoxOptions.setHeadless(HEADLESS);
             return firefoxOptions;
         }
     };

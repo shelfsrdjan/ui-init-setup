@@ -4,10 +4,13 @@ import org.aeonbits.owner.Config;
 
 import static com.ui_init_setup.practiceproject.constant.PropertyNameConstant.TARGET_ENV;
 
-@Config.Sources("file:${user.dir}/src/test/resources/browser.properties")
+@Config.Sources("file:${user.dir}/src/test/resources/properties/browser.properties")
 @Config.LoadPolicy(Config.LoadType.MERGE)
 public interface BrowserConfig extends Config {
 
     @Key("${" + TARGET_ENV + "}.headless")
     Boolean headless();
+
+    @Key("${" + TARGET_ENV + "}.browser")
+    String defaultBrowser();
 }
