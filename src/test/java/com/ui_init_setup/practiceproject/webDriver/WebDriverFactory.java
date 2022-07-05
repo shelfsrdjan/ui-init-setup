@@ -39,7 +39,7 @@ public enum WebDriverFactory {
         public FirefoxOptions getOptions() {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             firefoxOptions.addArguments(START_MAXIMIZED);
-//            firefoxOptions.setHeadless(HEADLESS);
+            firefoxOptions.setHeadless(HEADLESS);
             return firefoxOptions;
         }
     };
@@ -50,5 +50,6 @@ public enum WebDriverFactory {
     private static final boolean HEADLESS = ConfigurationManager.getBrowserConfigInstance().headless();
 
     public abstract RemoteWebDriver createDriver();
+
     public abstract AbstractDriverOptions<?> getOptions();
 }

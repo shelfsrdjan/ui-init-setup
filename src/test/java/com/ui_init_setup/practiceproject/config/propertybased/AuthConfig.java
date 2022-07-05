@@ -10,4 +10,10 @@ public interface AuthConfig extends Config {
 
     @Key("${" + TARGET_ENV + "}.apiKey")
     String apikey();
+
+    @Key("${" + TARGET_ENV + "}.sauceUsername")
+    String sauceUsername();
+
+    @Key("${" + TARGET_ENV + "}.saucePassword")
+    String saucePassword();
 }

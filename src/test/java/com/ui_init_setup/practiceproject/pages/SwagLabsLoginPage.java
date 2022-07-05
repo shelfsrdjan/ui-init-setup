@@ -1,10 +1,10 @@
 package com.ui_init_setup.practiceproject.pages;
 
+import com.ui_init_setup.practiceproject.constant.BrowserHttpConstant;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,8 +13,6 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
-
-    private final String baseURL = "https://www.saucedemo.com/";
 
     private final WebDriver driver;
     private final WebDriverWait wdWait;
@@ -31,12 +29,12 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
 
     @Override
     protected void load() {
-        driver.get(baseURL);
+        driver.get(BrowserHttpConstant.SAUCE_DEMO_BASE_URL);
     }
 
     @Override
     protected void isLoaded() throws Error {
-        assertTrue(driver.getCurrentUrl().contains(baseURL), "SwagLabs login page is not loaded!");
+        assertTrue(driver.getCurrentUrl().contains(BrowserHttpConstant.SAUCE_DEMO_BASE_URL), "SwagLabs login page is not loaded!");
     }
 
     private void loginAsValidUser(String username, String password) {
@@ -55,8 +53,8 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
         inputPassField.sendKeys(password);
     }
 
-    public void loginWithCredentials(String username, String password) {
+    public SwagLabsInventoryPage loginWithCredentials(String username, String password) {
         loginAsValidUser(username, password);
-        wdWait.until(ExpectedConditions.urlToBe("https://www.saucedemo.com/inventory.html"));
+        return new SwagLabsInventoryPage(driver);
     }
 }

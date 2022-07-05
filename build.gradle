@@ -12,7 +12,6 @@ repositories {
 ext {
     seleniumVersion = '4.1.4'
     junitVersion = '5.8.2'
-//    junitCompileVersion = '5.8.1'
     webDrviverVersion = '5.2.1'
     ownerVersion = '1.0.12'
     jacksonVersion = '2.13.2'
@@ -81,4 +80,10 @@ tasks.withType(Test) {
             // override property value defined in junit-platform.properties if provided via cmd
             'junit.jupiter.execution.parallel.enabled': project.hasProperty('parallel') ? project.getProperty('parallel') : false
     ]
+}
+
+task wip(type: Test) {
+    useJUnitPlatform() {
+        includeTags "wip"
+    }
 }

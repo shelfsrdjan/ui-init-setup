@@ -32,5 +32,5 @@ out/
 /allure-report/
 /allure-results/
 /.allure/
-/src/test/resources/properties/*
+/src/test/resources/properties/auth.properties
 .DS_Store
