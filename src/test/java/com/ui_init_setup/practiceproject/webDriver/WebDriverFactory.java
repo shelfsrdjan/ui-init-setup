@@ -50,5 +50,6 @@ public enum WebDriverFactory {
     private static final boolean HEADLESS = ConfigurationManager.getBrowserConfigInstance().headless();
 
     public abstract RemoteWebDriver createDriver();
+
     public abstract AbstractDriverOptions<?> getOptions();
 }
