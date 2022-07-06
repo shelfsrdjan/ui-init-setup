@@ -11,12 +11,14 @@ repositories {
 
 ext {
     seleniumVersion = '4.1.4'
-    junitVersion = '5.8.2'
     webDrviverVersion = '5.2.1'
+    junitVersion = '5.8.2'
+    junitPlatformVersion = '1.8.2'
     ownerVersion = '1.0.12'
     jacksonVersion = '2.13.2'
     lombokVersion = '1.18.24'
     slf4jVersion = '1.7.36'
+    assertjVersion = '3.22.0'
 }
 
 sourceCompatibility = '16'
@@ -27,36 +29,37 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-    implementation 'org.projectlombok:lombok:1.18.22'
-    testImplementation("org.seleniumhq.selenium:selenium-java:${seleniumVersion}")
+    testImplementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testImplementation "org.junit.platform:junit-platform-runner:$junitPlatformVersion"
+    testImplementation "org.junit.platform:junit-platform-suite-api:$junitPlatformVersion"
 
     // https://mvnrepository.com/artifact/org.aeonbits.owner/owner
     testImplementation("org.aeonbits.owner:owner:$ownerVersion") {
         because("we want a reduction in boilerplate code related to reading/using values from .properties files in Java")
     }
 
-    testImplementation("io.github.bonigarcia:webdrivermanager:${webDrviverVersion}")
+    testImplementation("io.github.bonigarcia:webdrivermanager:$webDrviverVersion")
 
     // logging facade
     // https://mvnrepository.com/artifact/org.slf4j
     testImplementation "org.slf4j:slf4j-api:$slf4jVersion"
     testImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
 
-    // jackson - yaml (de)serialization
-    // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
-    testImplementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
-    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-    testImplementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-
     // lombok - boilerplate-reducing annotations
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     testImplementation "org.projectlombok:lombok:$lombokVersion"
     testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
     testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    // https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testImplementation("org.assertj:assertj-core:$assertjVersion") {
+        because("we want to be able to write custom assertions")
+    }
+
 }
 
 test {
@@ -74,9 +77,9 @@ tasks.withType(Test) {
     testLogging.showStandardStreams = true
     group = "verification"
     systemProperties = [
-            "target_env": project.hasProperty('target_env') ? project.getProperty('target_env') : 'qa',
+            "target_env"                              : project.hasProperty('target_env') ? project.getProperty('target_env') : 'qa',
             // create testrail report after test run
-            "testrail": project.hasProperty('testrail') ? project.getProperty('testrail') : false,
+            "testrail"                                : project.hasProperty('testrail') ? project.getProperty('testrail') : false,
             // override property value defined in junit-platform.properties if provided via cmd
             'junit.jupiter.execution.parallel.enabled': project.hasProperty('parallel') ? project.getProperty('parallel') : false
     ]
