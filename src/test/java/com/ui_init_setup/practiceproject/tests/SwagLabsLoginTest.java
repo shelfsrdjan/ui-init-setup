@@ -2,14 +2,12 @@ package com.ui_init_setup.practiceproject.tests;
 
 import com.ui_init_setup.practiceproject.constant.BrowserHttpConstant;
 import com.ui_init_setup.practiceproject.junit.annotations.WIP;
-import com.ui_init_setup.practiceproject.junit.extension.SingleExecutionSetup;
 import com.ui_init_setup.practiceproject.webDriver.SupportedWebDriverProvider;
 import com.ui_init_setup.practiceproject.webDriver.ThreadLocalDriver;
 
 import com.ui_init_setup.practiceproject.pages.SwagLabsLoginPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.WebDriver;
