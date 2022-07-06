@@ -9,8 +9,10 @@ import static com.ui_init_setup.practiceproject.constant.PropertyNameConstant.TA
 public interface BrowserConfig extends Config {
 
     @Key("${" + TARGET_ENV + "}.headless")
+    @DefaultValue("FALSE")
     Boolean headless();
 
     @Key("${" + TARGET_ENV + "}.browser")
+    @DefaultValue("CHROME")
     String defaultBrowser();
 }

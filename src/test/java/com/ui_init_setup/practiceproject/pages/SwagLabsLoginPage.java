@@ -17,15 +17,15 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
     private final WebDriver driver;
     private final WebDriverWait wdWait;
 
+    @FindBy(id = "user-name") private WebElement inputUserField;
+    @FindBy(id = "password") private WebElement inputPassField;
+    @FindBy(id = "login-button") private WebElement loginBtn;
+
     public SwagLabsLoginPage(WebDriver driver) {
         this.driver = driver;
         this.wdWait = new WebDriverWait(driver, Duration.ofMillis(3000));
         PageFactory.initElements(driver, this);
     }
-
-    @FindBy(id ="user-name") private WebElement inputUserField;
-    @FindBy(id ="password") private WebElement inputPassField;
-    @FindBy(id ="login-button") private WebElement loginBtn;
 
     @Override
     protected void load() {
