@@ -21,13 +21,6 @@ ext {
     assertjVersion = '3.22.0'
 }
 
-sourceCompatibility = '16'
-targetCompatibility = '16'
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
-
 dependencies {
     testImplementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
 
@@ -81,7 +74,8 @@ tasks.withType(Test) {
             // create testrail report after test run
             "testrail"                                : project.hasProperty('testrail') ? project.getProperty('testrail') : false,
             // override property value defined in junit-platform.properties if provided via cmd
-            'junit.jupiter.execution.parallel.enabled': project.hasProperty('parallel') ? project.getProperty('parallel') : false
+//            'junit.jupiter.execution.parallel.enabled': project.hasProperty('parallel') ? project.getProperty('parallel') : false
+            'junit.jupiter.execution.parallel.enabled': project.hasProperty('parallel') ? project.getProperty('parallel') : true
     ]
 }
 

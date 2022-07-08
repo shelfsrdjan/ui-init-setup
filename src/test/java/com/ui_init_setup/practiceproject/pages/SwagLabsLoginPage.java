@@ -1,10 +1,12 @@
 package com.ui_init_setup.practiceproject.pages;
 
 import com.ui_init_setup.practiceproject.constant.BrowserHttpConstant;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -20,6 +22,8 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
     @FindBy(id = "user-name") private WebElement inputUserField;
     @FindBy(id = "password") private WebElement inputPassField;
     @FindBy(id = "login-button") private WebElement loginBtn;
+    @FindBy(className = "error-message-container") private WebElement errorMessage;
+
 
     public SwagLabsLoginPage(WebDriver driver) {
         this.driver = driver;
@@ -35,6 +39,7 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
     @Override
     protected void isLoaded() throws Error {
         assertTrue(driver.getCurrentUrl().contains(BrowserHttpConstant.SAUCE_DEMO_BASE_URL), "SwagLabs login page is not loaded!");
+
     }
 
     private void loginAsValidUser(String username, String password) {
@@ -53,8 +58,22 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
         inputPassField.sendKeys(password);
     }
 
+    public String getErrorMessage() {
+        wdWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("error-message-container")));
+        return errorMessage.getText();
+    }
+
+    public boolean errorMessIsShown() {
+        return errorMessage.isDisplayed();
+    }
+
     public SwagLabsInventoryPage loginWithCredentials(String username, String password) {
         loginAsValidUser(username, password);
         return new SwagLabsInventoryPage(driver);
+    }
+
+    public SwagLabsLoginPage loginWithNotValidCredentials(String username, String password) {
+        loginAsValidUser(username, password);
+        return this;
     }
 }
