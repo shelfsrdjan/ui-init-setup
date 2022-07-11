@@ -19,7 +19,7 @@ class SwagLabsLoginTest {
     @DisplayName("Should be login as:")
     @ParameterizedTest(name = "{index} => {0}")
     @CsvFileSource(resources = "/data/user.csv", numLinesToSkip = 1)
-    void shouldLoginAs(String username, String password) {
+    void shouldLoginAsValidUser(String username, String password) {
 
         new SwagLabsLoginPage(ThreadLocalDriver.getDriver())
                 .get()
@@ -28,6 +28,7 @@ class SwagLabsLoginTest {
         // ASSERT
         assertEquals(BrowserHttpConstant.SAUCE_INVENTORY_URL, ThreadLocalDriver.getDriver().getCurrentUrl());
     }
+
     @DisplayName("Should not be login with:")
     @ParameterizedTest(name = "{index} => {0}")
     @CsvFileSource(resources = "/data/wronguser.csv", numLinesToSkip = 1)
@@ -39,7 +40,6 @@ class SwagLabsLoginTest {
 
         // ASSERT
         assertTrue(swagLabsLoginPage.errorMessIsShown());
-        assertEquals(ErrorMessageConstant.ERROR_MESS_CONTAINER,swagLabsLoginPage.getErrorMessage());
-
+        assertEquals(ErrorMessageConstant.ERROR_MESS_CONTAINER, swagLabsLoginPage.getErrorMessage());
     }
 }

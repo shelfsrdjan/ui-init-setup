@@ -24,7 +24,6 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
     @FindBy(id = "login-button") private WebElement loginBtn;
     @FindBy(className = "error-message-container") private WebElement errorMessage;
 
-
     public SwagLabsLoginPage(WebDriver driver) {
         this.driver = driver;
         this.wdWait = new WebDriverWait(driver, Duration.ofMillis(3000));
@@ -39,13 +38,9 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
     @Override
     protected void isLoaded() throws Error {
         assertTrue(driver.getCurrentUrl().contains(BrowserHttpConstant.SAUCE_DEMO_BASE_URL), "SwagLabs login page is not loaded!");
-
-    }
-
-    private void loginAsValidUser(String username, String password) {
-        setUserName(username);
-        setPassword(password);
-        loginBtn.click();
+        assertTrue(inputUserField.isDisplayed(), "Input username field isn't loaded");
+        assertTrue(inputPassField.isDisplayed(), "Input password field isn't loaded");
+        assertTrue(loginBtn.isDisplayed(), "Login button isn't loaded");
     }
 
     private void setUserName(String username) {
@@ -67,13 +62,19 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
         return errorMessage.isDisplayed();
     }
 
+    private void loginAs(String username, String password) {
+        setUserName(username);
+        setPassword(password);
+        loginBtn.click();
+    }
+
     public SwagLabsInventoryPage loginWithCredentials(String username, String password) {
-        loginAsValidUser(username, password);
+        loginAs(username, password);
         return new SwagLabsInventoryPage(driver);
     }
 
     public SwagLabsLoginPage loginWithNotValidCredentials(String username, String password) {
-        loginAsValidUser(username, password);
+        loginAs(username, password);
         return this;
     }
 }

@@ -71,11 +71,9 @@ tasks.withType(Test) {
     group = "verification"
     systemProperties = [
             "target_env"                              : project.hasProperty('target_env') ? project.getProperty('target_env') : 'qa',
-            // create testrail report after test run
-            "testrail"                                : project.hasProperty('testrail') ? project.getProperty('testrail') : false,
+
             // override property value defined in junit-platform.properties if provided via cmd
-//            'junit.jupiter.execution.parallel.enabled': project.hasProperty('parallel') ? project.getProperty('parallel') : false
-            'junit.jupiter.execution.parallel.enabled': project.hasProperty('parallel') ? project.getProperty('parallel') : true
+            'junit.jupiter.execution.parallel.enabled': project.hasProperty('parallel') ? project.getProperty('parallel') : false
     ]
 }
 
