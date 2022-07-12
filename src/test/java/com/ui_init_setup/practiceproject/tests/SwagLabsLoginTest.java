@@ -1,7 +1,6 @@
 package com.ui_init_setup.practiceproject.tests;
 
 import com.ui_init_setup.practiceproject.constant.BrowserHttpConstant;
-import com.ui_init_setup.practiceproject.constant.ErrorMessageConstant;
 import com.ui_init_setup.practiceproject.junit.extension.WebDriverSetup;
 import com.ui_init_setup.practiceproject.pages.SwagLabsLoginPage;
 import com.ui_init_setup.practiceproject.webDriver.ThreadLocalDriver;
