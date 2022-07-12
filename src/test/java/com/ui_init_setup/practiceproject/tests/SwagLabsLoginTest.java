@@ -20,7 +20,6 @@ class SwagLabsLoginTest {
     @ParameterizedTest(name = "{index} => {0}")
     @CsvFileSource(resources = "/data/user.csv", numLinesToSkip = 1)
     void shouldLoginAsValidUser(String username, String password) {
-
         new SwagLabsLoginPage(ThreadLocalDriver.getDriver())
                 .get()
                 .loginWithCredentials(username, password);
@@ -33,13 +32,12 @@ class SwagLabsLoginTest {
     @ParameterizedTest(name = "{index} => {0}")
     @CsvFileSource(resources = "/data/wronguser.csv", numLinesToSkip = 1)
     void shouldNotLoginWith(String username, String password) {
-
         SwagLabsLoginPage swagLabsLoginPage = new SwagLabsLoginPage(ThreadLocalDriver.getDriver())
                 .get()
                 .loginWithNotValidCredentials(username, password);
 
         // ASSERT
         assertTrue(swagLabsLoginPage.errorMessIsShown());
-        assertEquals(ErrorMessageConstant.ERROR_MESS_CONTAINER, swagLabsLoginPage.getErrorMessage());
+        assertEquals("Epic sadface: Username and password do not match any user in this service", swagLabsLoginPage.getErrorMessage());
     }
 }
