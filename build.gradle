@@ -56,6 +56,10 @@ dependencies {
         because("we want to be able to write custom assertions")
     }
 
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    testImplementation 'io.rest-assured:rest-assured:5.0.0'
+
+
 
     testImplementation "org.aspectj:aspectjweaver:$aspectjweaver"
     testImplementation "io.qameta.allure:allure-junit5:$allurejunit5Version"
