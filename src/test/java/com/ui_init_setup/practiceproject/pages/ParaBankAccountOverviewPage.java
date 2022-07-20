@@ -1,6 +1,5 @@
 package com.ui_init_setup.practiceproject.pages;
 
-import com.ui_init_setup.practiceproject.constant.BrowserHttpConstant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,11 +18,11 @@ public class ParaBankAccountOverviewPage extends LoadableComponent<ParaBankAccou
 
     private final WebDriver driver;
     private final WebDriverWait wdWait;
+    public static final String PARA_BANK_ACCOUNT_OVERVIEW_URL = "https://parabank.parasoft.com/parabank/overview.htm";
 
     @FindBy(id = "accountTable") private WebElement table;
     @FindBy(css = "#accountTable tr[ng-repeat='account in accounts'] td:not(.ng-binding)") private WebElement accountColumn;
 //    @FindBy(xpath = "//a[contains(@href,'activity.htm')]") private WebElement accountColumn;
-
 
     public ParaBankAccountOverviewPage(WebDriver driver) {
         this.driver = driver;
@@ -31,26 +30,23 @@ public class ParaBankAccountOverviewPage extends LoadableComponent<ParaBankAccou
         wdWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("accountTable"))));
     }
 
+    public List<String> getAccounts() {
+//        return driver.findElements(By.xpath("//a[contains(@href,'activity.htm')]"))
+        return driver.findElements(By.cssSelector("#accountTable tr[ng-repeat='account in accounts'] td:not(.ng-binding)"))
+//        return driver.findElements((By) accountColumn)
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+    }
     @Override
     protected void load() {
-        driver.get(BrowserHttpConstant.PARA_BANK_ACCOUNT_OVERVIEW_URL);
-//        wdWait.until(ExpectedConditions.visibilityOf(table));
-//        wdWait.until(ExpectedConditions.visibilityOf(accountColumn));
+        driver.get(PARA_BANK_ACCOUNT_OVERVIEW_URL);
     }
 
     @Override
     protected void isLoaded() throws Error {
-        assertTrue(driver.getCurrentUrl().contains(BrowserHttpConstant.PARA_BANK_ACCOUNT_OVERVIEW_URL), "ParaBank account page is not loaded!");
+        assertTrue(driver.getCurrentUrl().contains(PARA_BANK_ACCOUNT_OVERVIEW_URL), "ParaBank account page is not loaded!");
         assertTrue(table.isDisplayed(),"Table isn't loaded");
         assertTrue(accountColumn.isDisplayed(),"Account Column isn't loaded");
-    }
-
-    public List<String> getAccounts() {
-        return driver.findElements(By.xpath("//a[contains(@href,'activity.htm')]"))
-//        return driver.findElements(By.cssSelector("#accountTable tr[ng-repeat='account in accounts'] td:not(.ng-binding)"))
-//        return driver.findElements(accountColumn)
-                .stream()
-                .map(WebElement::getText)
-                .collect(Collectors.toList());
     }
 }

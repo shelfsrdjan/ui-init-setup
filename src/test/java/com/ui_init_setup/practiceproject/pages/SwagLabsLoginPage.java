@@ -1,6 +1,5 @@
 package com.ui_init_setup.practiceproject.pages;
 
-import com.ui_init_setup.practiceproject.constant.BrowserHttpConstant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +17,7 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
 
     private final WebDriver driver;
     private final WebDriverWait wdWait;
+    public static final String SAUCE_DEMO_BASE_URL = "https://www.saucedemo.com/";
 
     @FindBy(id = "user-name") private WebElement inputUserField;
     @FindBy(id = "password") private WebElement inputPassField;
@@ -30,17 +30,20 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
         PageFactory.initElements(driver, this);
     }
 
-    @Override
-    protected void load() {
-        driver.get(BrowserHttpConstant.SAUCE_DEMO_BASE_URL);
+    public SwagLabsInventoryPage loginWithCredentials(String username, String password) {
+        loginAs(username, password);
+        return new SwagLabsInventoryPage(driver);
     }
 
-    @Override
-    protected void isLoaded() throws Error {
-        assertTrue(driver.getCurrentUrl().contains(BrowserHttpConstant.SAUCE_DEMO_BASE_URL), "SwagLabs login page is not loaded!");
-        assertTrue(inputUserField.isDisplayed(), "Input username field isn't loaded");
-        assertTrue(inputPassField.isDisplayed(), "Input password field isn't loaded");
-        assertTrue(loginBtn.isDisplayed(), "Login button isn't loaded");
+    public SwagLabsLoginPage loginWithNotValidCredentials(String username, String password) {
+        loginAs(username, password);
+        return this;
+    }
+
+    private void loginAs(String username, String password) {
+        setUserName(username);
+        setPassword(password);
+        loginBtn.click();
     }
 
     private void setUserName(String username) {
@@ -62,19 +65,16 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
         return errorMessage.isDisplayed();
     }
 
-    private void loginAs(String username, String password) {
-        setUserName(username);
-        setPassword(password);
-        loginBtn.click();
+    @Override
+    protected void load() {
+        driver.get(SAUCE_DEMO_BASE_URL);
     }
 
-    public SwagLabsInventoryPage loginWithCredentials(String username, String password) {
-        loginAs(username, password);
-        return new SwagLabsInventoryPage(driver);
-    }
-
-    public SwagLabsLoginPage loginWithNotValidCredentials(String username, String password) {
-        loginAs(username, password);
-        return this;
+    @Override
+    protected void isLoaded() throws Error {
+        assertTrue(driver.getCurrentUrl().contains(SAUCE_DEMO_BASE_URL), "SwagLabs login page is not loaded!");
+        assertTrue(inputUserField.isDisplayed(), "Input username field isn't loaded");
+        assertTrue(inputPassField.isDisplayed(), "Input password field isn't loaded");
+        assertTrue(loginBtn.isDisplayed(), "Login button isn't loaded");
     }
 }

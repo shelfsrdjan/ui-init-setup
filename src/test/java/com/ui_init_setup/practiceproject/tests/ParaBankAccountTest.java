@@ -18,15 +18,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith({WebDriverSetup.class})
 class ParaBankAccountTest {
 
+    private final String username = "john";
+    private final String password = "demo";
+
     @Test
-    void accountsListed() {
+    void fetchingUserAccountsList() {
         ParaBankAccountOverviewPage paraBankAccountOverviewPage = new ParaBankLoginComponent(ThreadLocalDriver.getDriver())
                 .get()
-                .login("john", "demo");
+                .login(username, password);
 
         List<String> actualAccountIdsList = paraBankAccountOverviewPage.getAccounts();
 
-        String customerId = Customers.getCustomerId("john");
+        String customerId = Customers.getCustomerId(username);
 
         var expectedAccountIdsList =
                 APIUtil.getAccounts(customerId)

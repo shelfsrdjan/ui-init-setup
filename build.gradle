@@ -3,6 +3,10 @@ plugins {
     id 'io.qameta.allure' version '2.9.6'
 }
 
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(16))
+}
+
 group 'com.example'
 version '1.0-SNAPSHOT'
 
@@ -22,6 +26,7 @@ ext {
     assertjVersion = '3.22.0'
     aspectjweaver = '1.9.5'
     allurejunit5Version = '2.12.1'
+    restAssuredVersion = '5.0.0'
 }
 
 dependencies {
@@ -57,9 +62,7 @@ dependencies {
     }
 
     // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
-    testImplementation 'io.rest-assured:rest-assured:5.0.0'
-
-
+    testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
 
     testImplementation "org.aspectj:aspectjweaver:$aspectjweaver"
     testImplementation "io.qameta.allure:allure-junit5:$allurejunit5Version"
@@ -67,13 +70,11 @@ dependencies {
     testImplementation "io.qameta.allure:allure-assertj:$allurejunit5Version"
     testImplementation "io.qameta.allure:allure-rest-assured:$allurejunit5Version"
     testImplementation "io.qameta.allure:allure-java-commons:$allurejunit5Version"
-
 }
 
 test {
     useJUnitPlatform()
 }
-
 
 tasks.withType(Test) {
     useJUnitPlatform() {
