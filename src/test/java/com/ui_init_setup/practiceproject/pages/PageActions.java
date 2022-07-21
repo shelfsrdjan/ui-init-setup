@@ -9,7 +9,7 @@ class PageActions {
 
     private final WebDriver driver;
 
-    public void clearAndType(WebElement element,String text) {
+    public void clearAndType(WebElement element, String text) {
         element.clear();
         element.sendKeys(text);
     }

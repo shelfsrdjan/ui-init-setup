@@ -22,10 +22,11 @@ class ParaBankAccountTest {
     private final String password = "demo";
 
     @Test
-    void fetchingUserAccountsList() {
+    void loggedInUserCanSeeAccountsList() {
         ParaBankAccountOverviewPage paraBankAccountOverviewPage = new ParaBankLoginComponent(ThreadLocalDriver.getDriver())
                 .get()
-                .login(username, password);
+                .login(username, password)
+                    .get();
 
         List<String> actualAccountIdsList = paraBankAccountOverviewPage.getAccounts();
 

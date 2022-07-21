@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ParaBankLoginComponent extends LoadableComponent<ParaBankLoginComponent> {
 
     private final WebDriver driver;
-    private final PageActions paraBankLoginPageActions;
+    private final PageActions pageActions;
     public static final String PARA_BANK_URL = "https://parabank.parasoft.com/parabank/index.htm";
 
     @FindBy(name = "username") private WebElement usernameField;
@@ -21,7 +21,7 @@ public class ParaBankLoginComponent extends LoadableComponent<ParaBankLoginCompo
     public ParaBankLoginComponent(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        paraBankLoginPageActions = new PageActions(driver);
+        pageActions = new PageActions(driver);
     }
 
     public ParaBankAccountOverviewPage login(String username, String password) {
@@ -36,11 +36,11 @@ public class ParaBankLoginComponent extends LoadableComponent<ParaBankLoginCompo
     }
 
     private void setUserName(String username) {
-        paraBankLoginPageActions.clearAndType(usernameField, username);
+        pageActions.clearAndType(usernameField, username);
     }
 
     private void setPassword(String password) {
-        paraBankLoginPageActions.clearAndType(passwordField, password);
+        pageActions.clearAndType(passwordField, password);
     }
 
     @Override

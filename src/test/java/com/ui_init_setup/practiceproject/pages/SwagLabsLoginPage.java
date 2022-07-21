@@ -17,6 +17,7 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
 
     private final WebDriver driver;
     private final WebDriverWait wdWait;
+    private final PageActions pageActions;
     public static final String SAUCE_DEMO_BASE_URL = "https://www.saucedemo.com/";
 
     @FindBy(id = "user-name") private WebElement inputUserField;
@@ -28,6 +29,7 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
         this.driver = driver;
         this.wdWait = new WebDriverWait(driver, Duration.ofMillis(3000));
         PageFactory.initElements(driver, this);
+        pageActions = new PageActions(driver);
     }
 
     public SwagLabsInventoryPage loginWithCredentials(String username, String password) {
@@ -47,13 +49,11 @@ public class SwagLabsLoginPage extends LoadableComponent<SwagLabsLoginPage> {
     }
 
     private void setUserName(String username) {
-        inputUserField.clear();
-        inputUserField.sendKeys(username);
+        pageActions.clearAndType(inputUserField, username);
     }
 
     private void setPassword(String password) {
-        inputPassField.clear();
-        inputPassField.sendKeys(password);
+        pageActions.clearAndType(inputPassField, password);
     }
 
     public String getErrorMessage() {
