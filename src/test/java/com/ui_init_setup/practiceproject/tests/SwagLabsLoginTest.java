@@ -1,7 +1,7 @@
 package com.ui_init_setup.practiceproject.tests;
 
-import com.ui_init_setup.practiceproject.constant.BrowserHttpConstant;
 import com.ui_init_setup.practiceproject.junit.extension.WebDriverSetup;
+import com.ui_init_setup.practiceproject.pages.SwagLabsInventoryPage;
 import com.ui_init_setup.practiceproject.pages.SwagLabsLoginPage;
 import com.ui_init_setup.practiceproject.webDriver.ThreadLocalDriver;
 import org.junit.jupiter.api.DisplayName;
@@ -19,12 +19,13 @@ class SwagLabsLoginTest {
     @ParameterizedTest(name = "{index} => {0}")
     @CsvFileSource(resources = "/data/user.csv", numLinesToSkip = 1)
     void shouldLoginAsValidUser(String username, String password) {
-        new SwagLabsLoginPage(ThreadLocalDriver.getDriver())
+        SwagLabsInventoryPage swagLabsInventoryPage = new SwagLabsLoginPage(ThreadLocalDriver.getDriver())
                 .get()
-                .loginWithCredentials(username, password);
+                .loginWithCredentials(username, password)
+                .get();
 
         // ASSERT
-        assertEquals(BrowserHttpConstant.SAUCE_INVENTORY_URL, ThreadLocalDriver.getDriver().getCurrentUrl());
+        assertTrue(swagLabsInventoryPage.currentUrlIsDisplayedCorrectly());
     }
 
     @DisplayName("Should not be login with:")
