@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SwagLabsInventoryPage extends LoadableComponent<SwagLabsInventoryPage> {
 
     private final WebDriver driver;
-    public static final String SAUCE_INVENTORY_URL = "https://www.saucedemo.com/inventory.html";
+    private static final String SAUCE_INVENTORY_URL = "https://www.saucedemo.com/inventory.html";
 
     public SwagLabsInventoryPage(WebDriver driver) {
         this.driver = driver;
@@ -17,6 +17,7 @@ public class SwagLabsInventoryPage extends LoadableComponent<SwagLabsInventoryPa
     public boolean currentUrlIsDisplayedCorrectly() {
         return driver.getCurrentUrl().equals(SAUCE_INVENTORY_URL);
     }
+
     @Override
     protected void load() {
         driver.get(SAUCE_INVENTORY_URL);

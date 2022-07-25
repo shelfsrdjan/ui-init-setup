@@ -26,7 +26,7 @@ class ParaBankAccountTest {
         ParaBankAccountOverviewPage paraBankAccountOverviewPage = new ParaBankLoginComponent(ThreadLocalDriver.getDriver())
                 .get()
                 .login(username, password)
-                    .get();
+                .get();
 
         List<String> actualAccountIdsList = paraBankAccountOverviewPage.getAccounts();
 

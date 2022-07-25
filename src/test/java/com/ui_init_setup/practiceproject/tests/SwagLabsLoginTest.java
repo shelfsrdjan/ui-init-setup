@@ -22,7 +22,7 @@ class SwagLabsLoginTest {
         SwagLabsInventoryPage swagLabsInventoryPage = new SwagLabsLoginPage(ThreadLocalDriver.getDriver())
                 .get()
                 .loginWithCredentials(username, password)
-                        .get();
+                .get();
 
         // ASSERT
         assertTrue(swagLabsInventoryPage.currentUrlIsDisplayedCorrectly());
