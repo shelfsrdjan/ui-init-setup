@@ -5,13 +5,13 @@ pipeline {
         stage('Build') {
             steps {
                 git 'https://github.com/shelfsrdjan/ui-init-setup'
-                bat ./gradlew clean
+                bat './gradlew clean'
             }
         }
 
         stage('Test') {
                     steps {
-                        ./gradle build
+                        './gradle build'
                         // gradle test
                     }
 
