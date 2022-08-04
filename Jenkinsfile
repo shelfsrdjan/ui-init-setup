@@ -6,7 +6,6 @@ pipeline {
             steps {
                 git 'https://github.com/shelfsrdjan/ui-init-setup'
                 bat ./gradlew clean
-                // clean and compile gradle
             }
         }
 
