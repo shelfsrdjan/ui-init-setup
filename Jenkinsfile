@@ -11,13 +11,13 @@ pipeline {
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/shelfsrdjan/ui-init-setup.git'
-                bat '.\gradlew clean'
+                bat './gradlew clean'
             }
         }
         
         stage('Test') {
             steps {
-                bat '.\gradlew test'
+                bat './gradlew test'
             }
             
             post {
