@@ -11,6 +11,7 @@ pipeline {
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/shelfsrdjan/ui-init-setup.git'
+                bat './gradlew'
                 bat './gradlew clean'
             }
         }
