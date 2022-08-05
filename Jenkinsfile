@@ -11,13 +11,8 @@ pipeline {
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/shelfsrdjan/ui-init-setup.git'
-                bat './gradlew clean'
-            }
-        }
-        
-        stage('Test') {
-            steps {
-                bat './gradlew test'
+                bat 'C:\ProgramData\Jenkins\.jenkins\workspace\pipe-demo\gradlew'
+                bat './gradlew build'
             }
             
             post {
@@ -25,8 +20,6 @@ pipeline {
                     junit '**/build/test-results/test/TEST-*.xml'
                 }
             }
-            
-        }
-        
+        }   
     }
 }
